@@ -13,9 +13,4 @@ public class PokerGameServiceApplication {
 		SpringApplication.run(PokerGameServiceApplication.class, args);
 	}
 
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 }
