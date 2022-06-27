@@ -63,6 +63,7 @@
 			<artifactId>lombok</artifactId>
 			<version>${org.projectlombok.version}</version>
 		</dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -80,7 +81,14 @@
 			<version>${jwt.version}</version>
 		</dependency>
 
-    </dependencies>
+		<!-- Send firebase push notifications to iOS and android mobile devices -->
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>7.0.0</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>

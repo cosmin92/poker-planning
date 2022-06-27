@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import it.reply.pokergame.model.Player;
-import it.reply.pokergame.model.PlayerRole;
 import it.reply.pokergame.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -28,9 +27,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        for (PlayerRole playerRole : player.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + playerRole.getRole()));
-        }
+        authorities.add(new SimpleGrantedAuthority(player.getRole()));
 
         return new CustomUserDetails(player.getId(), player.getUsername(), player.getPassword(), player.isActive(), authorities);
     }
