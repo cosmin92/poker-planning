@@ -9,5 +9,5 @@ public interface PlayerService {
     Long registration(Player player);
     Optional<Player> getPlayer(Long playerId);
     boolean existByUsername(String username);
-    void updatePlayerRole(Long playerId, String role);
+    Player updatePlayerRole(Long playerId, String role);
 }

@@ -37,12 +37,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void updatePlayerRole(Long playerId, String role) {
+    public Player updatePlayerRole(Long playerId, String role) {
         Player player = this.getPlayer(playerId).orElseThrow(
             () -> new ResourceNotFoundException(Player.class.getName(), playerId.toString())
         );
         player.setRole(role);
-        playerRepository.save(player);
+        return playerRepository.save(player);
     }
 
     @Override
