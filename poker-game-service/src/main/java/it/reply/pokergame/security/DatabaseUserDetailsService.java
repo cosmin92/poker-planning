@@ -32,6 +32,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + playerRole.getRole()));
         }
 
-        return new CustomUserDetails(player.getUsername(), player.getPassword(), player.isActive(), authorities);
+        return new CustomUserDetails(player.getId(), player.getUsername(), player.getPassword(), player.isActive(), authorities);
     }
 }

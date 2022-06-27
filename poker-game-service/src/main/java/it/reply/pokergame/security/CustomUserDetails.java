@@ -7,12 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetails implements UserDetails {
 
+    private final Long id;
     private final String username;
     private final String password;
     private final boolean active;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(String username, String password, boolean active, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(Long id, String username, String password, boolean active, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.active = active;
@@ -25,6 +27,7 @@ public class CustomUserDetails implements UserDetails {
         return authorities;
     }
 
+    public Long getId() { return id; }
 
     @Override
     public String getUsername() {
