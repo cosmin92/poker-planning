@@ -26,6 +26,7 @@ public class PlayerServiceImpl implements PlayerService {
         if (this.existByUsername(player.getUsername())) {
             throw new UniqueConstraintViolationException(Player.class.getName(), player.getUsername());
         }
+        player.setActive(true);
         player.setPassword(passwordEncoder.encode(player.getPassword()));
         return playerRepository.save(player).getId();
     }

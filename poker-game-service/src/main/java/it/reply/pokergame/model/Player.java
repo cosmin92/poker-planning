@@ -30,10 +30,11 @@ public class Player {
 
     private Integer vote;
 
+    private String role;
+
     @ManyToOne
     private Game game;
 
     private boolean active;
 
-    private String role;
 }
