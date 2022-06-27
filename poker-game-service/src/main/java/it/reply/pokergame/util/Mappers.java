@@ -2,6 +2,7 @@ package it.reply.pokergame.util;
 
 import java.util.Objects;
 
+import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.dto.PlayerRegistrationDto;
 import it.reply.pokergame.model.Player;
 
@@ -19,5 +20,14 @@ public class Mappers {
         }
         player.setActive(false);
         return player;
+    }
+
+    public static PlayerDto toPlayerDto(Player player) {
+        PlayerDto dto = new PlayerDto();
+        dto.setId(player.getId());
+        dto.setUsername(player.getUsername());
+        dto.setRole(player.getRole());
+        dto.setVote(player.getVote());
+        return dto;
     }
 }
