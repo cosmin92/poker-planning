@@ -1,0 +1,9 @@
+.table{
+    width: 350px;
+    height: 200px;
+    background-color: hsl(200, 100%, 85%);
+    border-radius: 10px;
+    border: 2px solid #3993ff;
+    margin-top: 50px;
+    margin-bottom: auto;
+}

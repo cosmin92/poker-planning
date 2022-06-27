@@ -1,0 +1,30 @@
+.btn-footer{
+    background: none;
+    border: 2px solid #3993ff;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 65px;
+    width: 45px;
+    
+}
+
+.btn-footer-primary{
+    color: #3993ff;
+    background-color: white;
+}
+
+.btn-footer-primary:hover{
+    background-color: hsl(200, 100%, 95%);
+}
+
+.mr-5px{
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.cards{
+    margin-bottom: 10px;
+    
+}

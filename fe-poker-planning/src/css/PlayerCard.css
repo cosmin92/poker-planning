@@ -1,0 +1,20 @@
+.player-info{
+    height: 150px;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid #3993ff;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-info:hover{
+    background-color: hsl(200, 100%, 95%);
+}
+
+.player-text{
+    color: #3993ff;
+}
+
+.player-wrapper{
+    margin:15px 0px;
+}

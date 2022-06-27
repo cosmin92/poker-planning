@@ -1,0 +1,38 @@
+.ContentArea {
+    display: flex;
+    flex-direction: column;
+    min-height: 60%;
+    overflow: auto;
+    padding: 2px;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px;
+    align-items: center;
+
+}
+
+.Board {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 2px;
+    width: 100%;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.Footer {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10px;
+    bottom: 0px;
+   
+}
+
+.text-nearFooter {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
