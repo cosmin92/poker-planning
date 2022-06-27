@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import it.reply.pokergame.exception.ResourceNotFoundException;
 import it.reply.pokergame.exception.UniqueConstraintViolationException;
 import it.reply.pokergame.model.Player;
-import it.reply.pokergame.repository.GameRepository;
 import it.reply.pokergame.repository.PlayerRepository;
 import it.reply.pokergame.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,17 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.findById(playerId);
     }
 
-    private boolean existByUsername(String username) {
+    @Override
+    public void updatePlayerRole(Long playerId, String role) {
+        Player player = this.getPlayer(playerId).orElseThrow(
+            () -> new ResourceNotFoundException(Player.class.getName(), playerId.toString())
+        );
+        player.setRole(role);
+        playerRepository.save(player);
+    }
+
+    @Override
+    public boolean existByUsername(String username) {
         return playerRepository.existsByUsername(username);
     }
 }
