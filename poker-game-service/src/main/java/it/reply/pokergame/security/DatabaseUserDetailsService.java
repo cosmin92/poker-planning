@@ -27,6 +27,8 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
         Set<GrantedAuthority> authorities = new HashSet<>();
 
+        authorities.add(new SimpleGrantedAuthority(player.getRole()));
+
         return new CustomUserDetails(player.getId(), player.getUsername(), player.getPassword(), player.isActive(), authorities);
     }
 }

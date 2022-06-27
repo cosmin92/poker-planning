@@ -1,0 +1,17 @@
+package it.reply.pokergame.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PlayerDto {
+
+    private Long id;
+    private String username;
+    private String role;
+    private Long vote;
+    private Long gameId;
+}
