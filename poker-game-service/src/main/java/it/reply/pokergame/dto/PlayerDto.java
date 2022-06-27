@@ -12,6 +12,5 @@ public class PlayerDto {
     private Long id;
     private String username;
     private String role;
-    private Long vote;
-    private Long gameId;
+    private Integer vote;
 }

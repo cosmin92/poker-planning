@@ -1,8 +1,11 @@
 package it.reply.pokergame.service;
 
+import java.util.Optional;
+
 import it.reply.pokergame.model.Player;
 
 public interface PlayerService {
 
-    Long registration(Player toPlayer);
+    Long registration(Player player);
+    Optional<Player> getPlayer(Long playerId);
 }
