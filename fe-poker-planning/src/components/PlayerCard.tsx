@@ -1,42 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import '../css/PlayerCard.css';
-import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css';
+import { Player } from '../model/Player';
 
-export default function PlayerCard() {
-
-  const [players, setPlayers] = useState<any>([]);
-/*
-  useEffect(() => {
-    getPlayers();
-  });
-
-  const getPlayers = async () => {
-    const playerData = getAllPlayers();
-    setPlayers(playerData);
-  }*/
-
+export default function PlayerCard({ player }: { player: Player }) {
   return (
-    <div className='player-wrapper'>
-      <Splide options={{
-        perPage: 5,
-        arrow: false,
-        pagination: false,
-        drag: 'free',
-        gap: '5rem'
-      }}>
-        {players.map((player: any) => {
-          return (
-            <SplideSlide>
-              <div className='player-info'>
-                <div className='player-text'>
-                  <p>{player.name + " " + player.surname}</p>
-                </div>
-              </div>
-            </SplideSlide>
-          );
-        })};
-      </Splide>
+    <div className='player-info'>
+      <div className='player-card-header'>
+          {player.username + " " + player.role}
+      </div>
+      <div className='player-card-content'>
+        <h2 className='player-card-content-emoji'>🤔</h2>
+      </div>
     </div>
   )
 }
