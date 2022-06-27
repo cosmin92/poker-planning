@@ -2,7 +2,7 @@ package it.reply.pokergame.service;
 
 import java.util.Optional;
 
-import it.reply.pokergame.model.Player;
+import it.reply.pokergame.model.entity.Player;
 
 public interface PlayerService {
 

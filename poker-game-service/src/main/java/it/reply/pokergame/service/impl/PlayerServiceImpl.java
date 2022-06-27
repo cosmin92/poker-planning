@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import it.reply.pokergame.exception.ResourceNotFoundException;
 import it.reply.pokergame.exception.UniqueConstraintViolationException;
-import it.reply.pokergame.model.Player;
+import it.reply.pokergame.model.entity.Player;
 import it.reply.pokergame.repository.PlayerRepository;
 import it.reply.pokergame.service.PlayerService;
 import lombok.RequiredArgsConstructor;

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.dto.PlayerRegistrationDto;
-import it.reply.pokergame.model.Player;
+import it.reply.pokergame.model.entity.Player;
 
 public class Mappers {
 

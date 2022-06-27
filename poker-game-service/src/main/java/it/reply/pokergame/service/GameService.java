@@ -1,8 +1,6 @@
 package it.reply.pokergame.service;
 
-import it.reply.pokergame.model.GameDto;
-import it.reply.pokergame.model.Player;
-import org.springframework.data.domain.Page;
+import it.reply.pokergame.dto.GameDto;
 
 public interface GameService {
 

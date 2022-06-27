@@ -1,7 +1,7 @@
 package it.reply.pokergame.mapper;
 
-import it.reply.pokergame.model.Game;
-import it.reply.pokergame.model.GameDto;
+import it.reply.pokergame.model.entity.Game;
+import it.reply.pokergame.dto.GameDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;

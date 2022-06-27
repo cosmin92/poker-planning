@@ -1,4 +1,4 @@
-package it.reply.pokergame.model;
+package it.reply.pokergame.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package it.reply.pokergame.model;
+package it.reply.pokergame.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

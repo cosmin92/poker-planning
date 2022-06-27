@@ -1,4 +1,4 @@
-package it.reply.pokergame.model;
+package it.reply.pokergame.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "votation")
+@Table(name = "votations")
 public class Votation {
 
     @Id
