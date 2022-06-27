@@ -4,4 +4,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: x-large;
+  }
+
+  .hidden {
+    display: none;
   }

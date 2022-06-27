@@ -23,7 +23,7 @@ const ButtonLoading: React.FC = () => {
 
   return (
     <>
-        <Button type='primary' shape='round' loading={loadings[0]} onClick={() => enterLoading(0)}>
+        <Button type='primary' shape='round' size='large' loading={loadings[0]} onClick={() => enterLoading(0)}>
           New game
         </Button>
         
