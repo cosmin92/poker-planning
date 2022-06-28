@@ -86,8 +86,6 @@ public class GameServiceImpl implements GameService {
 
         if (!activeCheck(admin)) throw new PokerException(HttpStatus.BAD_REQUEST,"PLAYER ACTIVE IS FALSE");
 
-        admin.setActive(false);
-
         for (Votation vot : currentGame.getVotation()) {
             if (vot.getGame().equals(currentGame)){
                 if (Objects.isNull(vot.getQta()) || vot.getQta() == 0){
@@ -102,7 +100,7 @@ public class GameServiceImpl implements GameService {
 
         }
 
-    if (!ch) {
+    if (Objects.isNull(ch) || !ch) {
       Votation currentVote = Votation.builder()
               .voteName(vote)
               .game(currentGame)
