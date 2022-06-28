@@ -1,10 +1,11 @@
 package it.reply.pokergame.service;
 
 import it.reply.pokergame.dto.GameDto;
+import it.reply.pokergame.dto.GameValidationDto;
 
 public interface GameService {
 
-    Long gameCreation(String gameName, Long id, String link);
+    Long gameCreation(GameValidationDto dto);
 
     GameDto findGame(Long gameId);
 

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.model.ErrorResponseModel;
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.service.GameService;
@@ -44,14 +45,10 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    public ResponseEntity<String> gameCreation(
-            @RequestParam(value = "gameName", required = true) String gameName,
-            @RequestParam(value = "playerId", required = true) Long playerId,
-            @RequestParam(value = "link", required = true) String link
-    ) {
+    public ResponseEntity<String> gameCreation(@RequestBody GameValidationDto dto) {
         log.info("Entered endpoint: POST '/game/gameCreation'");
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{gameId}")
-                .buildAndExpand(gameService.gameCreation(gameName, playerId, link)).toUri();
+                .buildAndExpand(gameService.gameCreation(dto)).toUri();
 
         return ResponseEntity.created(location).build();
     }

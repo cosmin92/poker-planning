@@ -2,6 +2,7 @@ package it.reply.pokergame.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.reply.pokergame.dto.GameDto;
+import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.exception.PokerException;
 import it.reply.pokergame.mapper.GameMapper;
 import it.reply.pokergame.model.entity.Game;
@@ -41,21 +42,21 @@ public class GameServiceImpl implements GameService {
 
 
     @Override
-    public Long gameCreation(String gameName, Long id, String link) {
+    public Long gameCreation(GameValidationDto dto) {
 
-        Optional<Player> admin = Optional.of(playerService.updatePlayerRole(id, RoleEnum.ADMIN.toString()));
+        Optional<Player> admin = Optional.of(playerService.updatePlayerRole(dto.getPlayerId(), RoleEnum.ADMIN.toString()));
 
-        admin.orElseThrow().getGame().setGameName(gameName);
+    admin.orElseThrow().getGame().setGameName(dto.getGameName());
 
         List<Player> playerList = new ArrayList<>();
         playerList.add(admin.orElseThrow());
-        Game newGame = Game.builder()
-                .gameName(gameName)
-                .playLink(link)
+    Game newGame = Game.builder()
+                .gameName(dto.getGameName())
+                .playLink(dto.getGameLink())
                 .players(playerList)
                 .build();
 
-        log.info("created game :"+gameName);
+        log.info("created game :"+dto.getGameName());
 
         return gameRepository.save(newGame).getId();
 
