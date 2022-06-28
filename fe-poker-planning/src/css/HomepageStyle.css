@@ -7,6 +7,10 @@
     font-size: x-large;
   }
 
+  .home-items h1 {
+    font-weight: bolder;
+  }
+
   .hidden {
     display: none;
   }
