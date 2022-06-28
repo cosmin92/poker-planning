@@ -1,5 +1,6 @@
 package it.reply.pokergame.dto;
 
+import it.reply.pokergame.model.entity.Game;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

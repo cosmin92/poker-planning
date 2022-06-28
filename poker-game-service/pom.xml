@@ -26,6 +26,7 @@
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
 		<org.projectlombok.version>1.18.22</org.projectlombok.version>
 		<org.projectlombok.version>1.18.22</org.projectlombok.version>
+		<com.google.firebase.version>7.0.0</com.google.firebase.version>
 	</properties>
 
 	<dependencies>
@@ -95,7 +96,7 @@
 		<dependency>
 			<groupId>com.google.firebase</groupId>
 			<artifactId>firebase-admin</artifactId>
-			<version>7.0.0</version>
+			<version>${com.google.firebase.version}</version>
 		</dependency>
 
 	</dependencies>

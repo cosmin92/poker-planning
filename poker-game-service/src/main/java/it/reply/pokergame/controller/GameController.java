@@ -23,7 +23,7 @@ import java.net.URI;
 @Validated
 @RestController
 @Slf4j
-@RequestMapping(path = "/game")
+@RequestMapping(path = "/api/games")
 @Tag(name = "Game Controller", description = "Endpoints for managing checks")
 public class GameController {
 
@@ -68,9 +68,9 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    @GetMapping("/findGame")
-    public ResponseEntity<GameDto> findGame(@RequestParam(value = "idGame", required = true) Long idGame) {
-        log.info("Entered endpoint: GET '/game/findGame'");
+    @GetMapping("/{idGame}")
+    public ResponseEntity<GameDto> findGame(@PathVariable("idGame") Long idGame) {
+        log.info("Entered endpoint: GET '/game/{}'", idGame);
         return ResponseEntity.ok(gameService.findGame(idGame));
     }
 
@@ -93,7 +93,7 @@ public class GameController {
     public ResponseEntity<GameDto> addVotation(@RequestParam(value = "idGame", required = true) Long idGame,
                                                @RequestParam(value = "idPlayer", required = true) Long idPlayer,
                                                @RequestParam(value = "vote", required = true) Integer vote) {
-        log.info("Entered endpoint: POST '/game/findGame'");
+        log.info("Entered endpoint: POST '/game/addVotation'");
         return ResponseEntity.ok(gameService.addGame(idGame, idPlayer, vote));
     }
 }
