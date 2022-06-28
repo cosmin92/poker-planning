@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class Tokens {
     private String access;
     private String refresh;
-    private Long id;
+    private Long userId;
 }
