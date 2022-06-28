@@ -1,5 +1,6 @@
 package it.reply.pokergame.security.jwt;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -19,12 +20,15 @@ public class JwtUtil {
         long nowMillis = System.currentTimeMillis();
         long expMillis = nowMillis + TimeUnit.MINUTES.toMillis(10);   /// expire after 10min
 
+        List<String> roles = new ArrayList<>();
+        user.getAuthorities().forEach(authority -> roles.add(authority.getAuthority()));
+
         return JWT.create()
             .withIssuedAt(new Date(nowMillis))
             .withExpiresAt(new Date(expMillis))
             .withSubject(user.getUsername())
             .withIssuer(SecurityConstants.JWT_ISSUER)
-            .withClaim(SecurityConstants.JWT_ROLES, List.of(user.getAuthorities()))
+            .withClaim(SecurityConstants.JWT_ROLES, roles)
             .withClaim(SecurityConstants.JWT_USER_ID, user.getId())
             .sign(Algorithm.HMAC256(SecurityConstants.JWT_SECRET));
     }
@@ -50,6 +54,6 @@ public class JwtUtil {
 
     public static boolean validateToken(String token) {
         Date expiration = decodeJwt(token).getExpiresAt();
-        return expiration.before(new Date());
+        return expiration.after(new Date());
     }
 }

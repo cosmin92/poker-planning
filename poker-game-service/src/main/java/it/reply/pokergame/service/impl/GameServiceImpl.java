@@ -2,6 +2,7 @@ package it.reply.pokergame.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.reply.pokergame.dto.GameDto;
+import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.exception.PokerException;
 import it.reply.pokergame.mapper.GameMapper;
 import it.reply.pokergame.model.entity.Game;
@@ -41,21 +42,21 @@ public class GameServiceImpl implements GameService {
 
 
     @Override
-    public Long gameCreation(String gameName, Long id, String link) {
+    public Long gameCreation(GameValidationDto dto) {
 
-        Optional<Player> admin = Optional.of(playerService.updatePlayerRole(id, RoleEnum.ADMIN.toString()));
-
-        admin.orElseThrow().getGame().setGameName(gameName);
+        Player admin = playerService.updatePlayerRole(dto.getPlayerId(), RoleEnum.ADMIN.toString());
 
         List<Player> playerList = new ArrayList<>();
-        playerList.add(admin.orElseThrow());
-        Game newGame = Game.builder()
-                .gameName(gameName)
-                .playLink(link)
+        playerList.add(admin);
+    Game newGame = Game.builder()
+                .gameName(dto.getGameName())
+                .playLink(dto.getGameLink())
                 .players(playerList)
                 .build();
 
-        log.info("created game :"+gameName);
+        log.info("created game :"+dto.getGameName());
+
+        admin.setGame(newGame);
 
         return gameRepository.save(newGame).getId();
 
@@ -75,7 +76,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameDto addGame(Long idGame, Long idPlayer, Integer vote) {
+    public GameDto addVotation(Long idGame, Long idPlayer, Integer vote) {
 
         Boolean ch = null;
 
@@ -84,8 +85,6 @@ public class GameServiceImpl implements GameService {
         Game currentGame = gameRepository.findById(idGame).orElseThrow();
 
         if (!activeCheck(admin)) throw new PokerException(HttpStatus.BAD_REQUEST,"PLAYER ACTIVE IS FALSE");
-
-        admin.setActive(false);
 
         for (Votation vot : currentGame.getVotation()) {
             if (vot.getGame().equals(currentGame)){
@@ -101,7 +100,7 @@ public class GameServiceImpl implements GameService {
 
         }
 
-    if (!ch) {
+    if (Objects.isNull(ch) || !ch) {
       Votation currentVote = Votation.builder()
               .voteName(vote)
               .game(currentGame)

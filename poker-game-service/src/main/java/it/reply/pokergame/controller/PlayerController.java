@@ -4,7 +4,7 @@ import java.net.URI;
 
 import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.dto.PlayerRegistrationDto;
-import it.reply.pokergame.model.Tokens;
+import it.reply.pokergame.security.model.Tokens;
 import it.reply.pokergame.security.CustomUserDetails;
 import it.reply.pokergame.security.CustomUserDetailsService;
 import it.reply.pokergame.security.jwt.JwtUtil;
@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -31,14 +32,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/players")
+@RequestMapping(path = "/api/players")
 public class PlayerController {
 
     private final PlayerService playerService;
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService customUserDetailsService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> registration(@RequestBody PlayerRegistrationDto playerRegistrationDto) {
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{playerId}")

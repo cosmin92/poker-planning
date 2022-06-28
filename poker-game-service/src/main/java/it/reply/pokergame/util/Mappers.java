@@ -16,7 +16,7 @@ public class Mappers {
         if(Objects.isNull(playerRegistrationDto.getRole())) {
             player.setRole(RoleEnum.USER.toString());
         } else {
-            player.setRole(playerRegistrationDto.getRole());
+            player.setRole(playerRegistrationDto.getRole().toUpperCase());
         }
         player.setActive(false);
         return player;

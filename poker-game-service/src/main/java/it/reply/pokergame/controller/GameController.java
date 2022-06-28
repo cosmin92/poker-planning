@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.model.ErrorResponseModel;
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.service.GameService;
@@ -22,7 +23,7 @@ import java.net.URI;
 @Validated
 @RestController
 @Slf4j
-@RequestMapping(path = "/game")
+@RequestMapping(path = "/api/games")
 @Tag(name = "Game Controller", description = "Endpoints for managing checks")
 public class GameController {
 
@@ -44,14 +45,10 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    public ResponseEntity<String> gameCreation(
-            @RequestParam(value = "gameName", required = true) String gameName,
-            @RequestParam(value = "playerId", required = true) Long playerId,
-            @RequestParam(value = "link", required = true) String link
-    ) {
+    public ResponseEntity<String> gameCreation(@RequestBody GameValidationDto dto) {
         log.info("Entered endpoint: POST '/game/gameCreation'");
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{gameId}")
-                .buildAndExpand(gameService.gameCreation(gameName, playerId, link)).toUri();
+                .buildAndExpand(gameService.gameCreation(dto)).toUri();
 
         return ResponseEntity.created(location).build();
     }
@@ -71,9 +68,9 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    @GetMapping("/findGame")
-    public ResponseEntity<GameDto> findGame(@RequestParam(value = "idGame", required = true) Long idGame) {
-        log.info("Entered endpoint: GET '/game/findGame'");
+    @GetMapping("/{idGame}")
+    public ResponseEntity<GameDto> findGame(@PathVariable("idGame") Long idGame) {
+        log.info("Entered endpoint: GET '/game/{}'", idGame);
         return ResponseEntity.ok(gameService.findGame(idGame));
     }
 
@@ -92,11 +89,11 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    @GetMapping("/findGame")
+    @PostMapping("/addVotation")
     public ResponseEntity<GameDto> addVotation(@RequestParam(value = "idGame", required = true) Long idGame,
                                                @RequestParam(value = "idPlayer", required = true) Long idPlayer,
                                                @RequestParam(value = "vote", required = true) Integer vote) {
-        log.info("Entered endpoint: POST '/game/findGame'");
-        return ResponseEntity.ok(gameService.addGame(idGame, idPlayer, vote));
+        log.info("Entered endpoint: POST '/game/addVotation'");
+        return ResponseEntity.ok(gameService.addVotation(idGame, idPlayer, vote));
     }
 }
