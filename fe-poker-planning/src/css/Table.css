@@ -7,3 +7,65 @@
     margin-top: 50px;
     margin-bottom: auto;
 }
+
+.average-title{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 0 0 20px;
+    border-bottom: 1px solid #3993ff;
+    font-weight: 700;
+    font-size: 20px;
+    align-items: center;
+}
+
+.average{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    padding-left: 100px;
+}
+
+.tableContentArea{
+    display: inline;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 30px;
+    padding-bottom: 30px;
+}
+
+.buttonStyle{
+    border: 1px solid #3993ff;
+    border-radius: 50px;
+    width: 75px;
+    height: 75px;
+    margin-top: 25px;
+    margin-left: 40px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.buttonInviteStyle{
+    border: 1px solid #3993ff;
+    border-radius: 50px;
+    width: 75px;
+    height: 75px;
+    margin-left: 100px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.eyeStyle{
+    color: #3993ff;
+    font-size: 50px;
+    margin-top: 10px;
+}
+
+.inviteStyle{
+    color: #3993ff;
+    font-size: 50px;
+    margin-top: 10px;
+}
+
+.textUnderButton{
+    margin-top: 20px;
+}
