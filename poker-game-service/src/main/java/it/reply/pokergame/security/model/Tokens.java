@@ -1,4 +1,4 @@
-package it.reply.pokergame.model;
+package it.reply.pokergame.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

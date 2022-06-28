@@ -7,6 +7,7 @@ public final class SecurityConstants {
     public static final String JWT_ROLES;
     public static final String JWT_USER_ID;
     public static final String BEARER_AUTH;
+    public static final String H2_CONSOLE = "/h2-console/**";
 
     static {
         JWT_SECRET = "q3t6w9z$C&F)J@NcQfTjWnZr4u7x!A%D*G-KaPdSgUkXp2s5v8y/B?E(H+MbQeTh";

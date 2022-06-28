@@ -4,8 +4,6 @@ server:
     include-binding-errors: always
     include-exception: false
   port: ${PORT:8080}
-  servlet:
-    context-path: /api
 
 spring:
   application:
@@ -15,17 +13,19 @@ spring:
     ansi.enabled: always
 
   datasource:
-    url: jdbc:h2:mem:university-service;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    url: jdbc:h2:mem:poker-planning-service;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
     username: username
     password: password
     driverClassName: org.h2.Driver
+
     jpa:
       generate-ddl: true
       hibernate:
         ddl-auto: none
       open-in-view: true
       database-platform: org.hibernate.dialect.H2Dialect
-      defer-datasource-initialization: false
+      defer-datasource-initialization: true
+
     h2:
       console:
         enabled: true
