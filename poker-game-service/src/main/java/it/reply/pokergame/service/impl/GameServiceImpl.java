@@ -44,12 +44,12 @@ public class GameServiceImpl implements GameService {
     @Override
     public Long gameCreation(GameValidationDto dto) {
 
-        Optional<Player> admin = Optional.of(playerService.updatePlayerRole(dto.getPlayerId(), RoleEnum.ADMIN.toString()));
+        Player admin = playerService.updatePlayerRole(dto.getPlayerId(), RoleEnum.ADMIN.toString());
 
-    admin.orElseThrow().getGame().setGameName(dto.getGameName());
+    admin.getGame().setGameName(dto.getGameName());
 
         List<Player> playerList = new ArrayList<>();
-        playerList.add(admin.orElseThrow());
+        playerList.add(admin);
     Game newGame = Game.builder()
                 .gameName(dto.getGameName())
                 .playLink(dto.getGameLink())
