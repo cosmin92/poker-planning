@@ -76,7 +76,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameDto addGame(Long idGame, Long idPlayer, Integer vote) {
+    public GameDto addVotation(Long idGame, Long idPlayer, Integer vote) {
 
         Boolean ch = null;
 

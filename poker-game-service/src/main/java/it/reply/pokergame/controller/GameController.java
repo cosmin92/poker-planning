@@ -94,6 +94,6 @@ public class GameController {
                                                @RequestParam(value = "idPlayer", required = true) Long idPlayer,
                                                @RequestParam(value = "vote", required = true) Integer vote) {
         log.info("Entered endpoint: POST '/game/addVotation'");
-        return ResponseEntity.ok(gameService.addGame(idGame, idPlayer, vote));
+        return ResponseEntity.ok(gameService.addVotation(idGame, idPlayer, vote));
     }
 }

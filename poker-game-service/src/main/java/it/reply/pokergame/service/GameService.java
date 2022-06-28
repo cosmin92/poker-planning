@@ -9,5 +9,5 @@ public interface GameService {
 
     GameDto findGame(Long gameId);
 
-    GameDto addGame(Long idGame, Long idPlayer, Integer vote);
+    GameDto addVotation(Long idGame, Long idPlayer, Integer vote);
 }
