@@ -92,7 +92,7 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    @GetMapping("/findGame")
+    @PostMapping("/addVotation")
     public ResponseEntity<GameDto> addVotation(@RequestParam(value = "idGame", required = true) Long idGame,
                                                @RequestParam(value = "idPlayer", required = true) Long idPlayer,
                                                @RequestParam(value = "vote", required = true) Integer vote) {
