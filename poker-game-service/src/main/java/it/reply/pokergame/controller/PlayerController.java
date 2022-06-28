@@ -4,7 +4,6 @@ import java.net.URI;
 
 import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.dto.PlayerRegistrationDto;
-import it.reply.pokergame.model.Credentials;
 import it.reply.pokergame.model.Tokens;
 import it.reply.pokergame.security.CustomUserDetails;
 import it.reply.pokergame.security.CustomUserDetailsService;
@@ -20,7 +19,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
