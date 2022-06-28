@@ -36,7 +36,7 @@ export default function GameArea() {
             </div>
             <div className='Footer'>
                 <div className='text-nearFooter'>Choose your card 👇</div>
-                <div><CardPicker /> </div>
+                <div><CardPicker currentPlayerId={2} /> </div>
             </div>
         </>
     )

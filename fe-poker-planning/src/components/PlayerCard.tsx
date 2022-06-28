@@ -10,7 +10,9 @@ export default function PlayerCard({ player }: { player: Player }) {
           {player.username + " " + player.role}
       </div>
       <div className='player-card-content'>
-        <h2 className='player-card-content-emoji'>🤔</h2>
+        <h2 className='player-card-content-emoji'>
+          🤔
+          </h2>
       </div>
     </div>
   )
