@@ -46,7 +46,7 @@ public class GameController {
     )
     public ResponseEntity<String> gameCreation(
             @RequestParam(value = "gameName", required = true) String gameName,
-            @RequestParam(value = "admin", required = true) Long playerId,
+            @RequestParam(value = "playerId", required = true) Long playerId,
             @RequestParam(value = "link", required = true) String link
     ) {
         log.info("Entered endpoint: POST '/game/gameCreation'");
@@ -73,7 +73,30 @@ public class GameController {
     )
     @GetMapping("/findGame")
     public ResponseEntity<GameDto> findGame(@RequestParam(value = "idGame", required = true) Long idGame) {
-        log.info("Entered endpoint: POST '/game/findGame'");
+        log.info("Entered endpoint: GET '/game/findGame'");
         return ResponseEntity.ok(gameService.findGame(idGame));
+    }
+
+
+    @Operation(
+            summary = "Get information of game",
+            description = "Get Game",
+            tags = { "game Controller" },
+            responses = {
+                    @ApiResponse(
+                            description = "Ok",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content =  @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseModel.class))),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
+            }
+    )
+    @GetMapping("/findGame")
+    public ResponseEntity<GameDto> addVotation(@RequestParam(value = "idGame", required = true) Long idGame,
+                                               @RequestParam(value = "idPlayer", required = true) Long idPlayer,
+                                               @RequestParam(value = "vote", required = true) Integer vote) {
+        log.info("Entered endpoint: POST '/game/findGame'");
+        return ResponseEntity.ok(gameService.addGame(idGame, idPlayer, vote));
     }
 }

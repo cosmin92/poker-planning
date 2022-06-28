@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-//Game id GameName(String) players(Player)
 @Data
 @Builder
 @Entity
@@ -27,4 +26,8 @@ public class Game {
 
     @OneToMany(mappedBy = "game")
     private List<Player> players;
+
+    @OneToMany(mappedBy = "game")
+    private List<Votation> votation;
+
 }

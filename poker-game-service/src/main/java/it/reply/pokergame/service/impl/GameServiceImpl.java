@@ -1,11 +1,12 @@
 package it.reply.pokergame.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.exception.PokerException;
 import it.reply.pokergame.mapper.GameMapper;
 import it.reply.pokergame.model.entity.Game;
-import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.model.entity.Player;
+import it.reply.pokergame.model.entity.Votation;
 import it.reply.pokergame.repository.GameRepository;
 import it.reply.pokergame.repository.PlayerRepository;
 import it.reply.pokergame.service.GameService;
@@ -66,5 +67,59 @@ public class GameServiceImpl implements GameService {
 
         if (!Objects.isNull(dto))return dto;
             else throw new PokerException(HttpStatus.NOT_FOUND, "result not found for this id");
+    }
+
+    public boolean activeCheck(Player player){
+        if (player.isActive()) return true;
+        else return false;
+    }
+
+    @Override
+    public GameDto addGame(Long idGame, Long idPlayer, Integer vote) {
+
+        Boolean ch = null;
+
+        Player admin = playerRepository.findById(idPlayer).orElseThrow();
+
+        Game currentGame = gameRepository.findById(idGame).orElseThrow();
+
+        if (!activeCheck(admin)) throw new PokerException(HttpStatus.BAD_REQUEST,"PLAYER ACTIVE IS FALSE");
+
+        admin.setActive(false);
+
+        for (Votation vot : currentGame.getVotation()) {
+            if (vot.getGame().equals(currentGame)){
+                if (Objects.isNull(vot.getQta()) || vot.getQta() == 0){
+                    vot.setQta(1);
+                }else {
+                    vot.setQta(vot.getQta()+1);
+                }
+                ch = true;
+            }else {
+                ch =false;
+            }
+
+        }
+
+    if (!ch) {
+      Votation currentVote = Votation.builder()
+              .voteName(vote)
+              .game(currentGame)
+              .qta(1)
+              .build();
+
+      currentGame.getVotation().add(currentVote);
+            }
+
+            gameRepository.deleteById(currentGame.getId());
+            playerRepository.deleteById(admin.getId());
+
+            playerRepository.save(admin);
+            gameRepository.save(currentGame);
+
+            return gameMapper.mapFromEntityToDto(currentGame);
+
+
+
     }
 }
