@@ -46,8 +46,6 @@ public class GameServiceImpl implements GameService {
 
         Player admin = playerService.updatePlayerRole(dto.getPlayerId(), RoleEnum.ADMIN.toString());
 
-    admin.getGame().setGameName(dto.getGameName());
-
         List<Player> playerList = new ArrayList<>();
         playerList.add(admin);
     Game newGame = Game.builder()
@@ -57,6 +55,8 @@ public class GameServiceImpl implements GameService {
                 .build();
 
         log.info("created game :"+dto.getGameName());
+
+        admin.setGame(newGame);
 
         return gameRepository.save(newGame).getId();
 
