@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { SmileTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import '../css/HomepageNavbarStyle.css';
+import NavbarLogStatus from './NavbarLogStatus';
 
 const HomepageNavbar = () => {
 
@@ -13,15 +14,7 @@ const HomepageNavbar = () => {
         </div>
 
         <div className='nav-home-welcome'>
-            <h2>Welcome, user!</h2>
-
-            <div className='nav-home-button'>
-                <Link to='/login'>
-                    <Button type="primary" shape="round" size='large'>
-                        Login
-                    </Button>
-                </Link>
-            </div>
+            <NavbarLogStatus />
         </div>
     </>
   );
