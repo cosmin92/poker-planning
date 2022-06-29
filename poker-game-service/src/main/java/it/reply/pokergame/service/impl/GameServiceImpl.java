@@ -3,6 +3,7 @@ package it.reply.pokergame.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.dto.GameValidationDto;
+import it.reply.pokergame.dto.VotationDto;
 import it.reply.pokergame.exception.PokerException;
 import it.reply.pokergame.mapper.GameMapper;
 import it.reply.pokergame.model.entity.Game;
@@ -15,14 +16,11 @@ import it.reply.pokergame.service.PlayerService;
 import it.reply.pokergame.util.RoleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,22 +68,18 @@ public class GameServiceImpl implements GameService {
             else throw new PokerException(HttpStatus.NOT_FOUND, "result not found for this id");
     }
 
-    public boolean activeCheck(Player player){
-        if (player.isActive()) return true;
-        else return false;
-    }
-
     @Override
     public GameDto addVotation(Long idGame, Long idPlayer, Integer vote) {
 
-        Boolean ch = null;
+        boolean ch = true;
 
-        Player admin = playerRepository.findById(idPlayer).orElseThrow();
+        Votation currentVote;
+
+        Player admin = playerService.getPlayer(idPlayer).orElseThrow();
 
         Game currentGame = gameRepository.findById(idGame).orElseThrow();
 
-        if (!activeCheck(admin)) throw new PokerException(HttpStatus.BAD_REQUEST,"PLAYER ACTIVE IS FALSE");
-
+        if (currentGame.getVotation().isEmpty()) ch = false;
         for (Votation vot : currentGame.getVotation()) {
             if (vot.getGame().equals(currentGame)){
                 if (Objects.isNull(vot.getQta()) || vot.getQta() == 0){
@@ -94,29 +88,23 @@ public class GameServiceImpl implements GameService {
                     vot.setQta(vot.getQta()+1);
                 }
                 ch = true;
-            }else {
-                ch =false;
-            }
-
+            }else ch =false;
         }
 
-    if (Objects.isNull(ch) || !ch) {
-      Votation currentVote = Votation.builder()
-              .voteName(vote)
-              .game(currentGame)
-              .qta(1)
-              .build();
+        if (!ch) {
+             currentVote = Votation.builder()
+                    .voteName(vote)
+                    .qta(1)
+                     .game(currentGame)
+                    .build();
 
-      currentGame.getVotation().add(currentVote);
-            }
+            currentGame.getVotation().add(currentVote);
+        }
 
-            gameRepository.deleteById(currentGame.getId());
-            playerRepository.deleteById(admin.getId());
+        playerRepository.save(admin);
+        gameRepository.save(currentGame);
 
-            playerRepository.save(admin);
-            gameRepository.save(currentGame);
-
-            return gameMapper.mapFromEntityToDto(currentGame);
+        return gameMapper.mapFromEntityToDto(currentGame);
 
 
 

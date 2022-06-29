@@ -3,6 +3,7 @@ package it.reply.pokergame.dto;
 import it.reply.pokergame.model.entity.Game;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 public class VotationDto {
     private Long id;
 
@@ -20,6 +22,6 @@ public class VotationDto {
 
     private Integer qta;
 
-    private GameDto game;
+    //private GameDto game;
 
 }
