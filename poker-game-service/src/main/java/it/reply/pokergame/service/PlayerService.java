@@ -6,6 +6,7 @@ import it.reply.pokergame.model.entity.Player;
 
 public interface PlayerService {
 
+    Player save(Player player);
     Long registration(Player player);
     Optional<Player> getPlayer(Long playerId);
     boolean existByUsername(String username);

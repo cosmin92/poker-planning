@@ -15,7 +15,7 @@ public class GameValidationDto {
     private String gameName;
 
     @NotEmpty
-    private String gameLink;
+    private String playLink;
 
     @NotEmpty
     private Long playerId;

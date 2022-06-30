@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.reply.pokergame.exception.ResourceNotFoundException;
 import it.reply.pokergame.exception.UniqueConstraintViolationException;
@@ -22,18 +23,23 @@ public class PlayerServiceImpl implements PlayerService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    public Player save(Player player) {
+        return playerRepository.save(player);
+    }
+
+    @Override
     public Long registration(Player player) {
         if (this.existByUsername(player.getUsername())) {
             throw new UniqueConstraintViolationException(Player.class.getName(), player.getUsername());
         }
         player.setActive(true);
         player.setPassword(passwordEncoder.encode(player.getPassword()));
-        return playerRepository.save(player).getId();
+        return this.save(player).getId();
     }
 
     @Override
     public Optional<Player> getPlayer(Long playerId) {
-        return playerRepository.findById(playerId);
+        return playerRepository.findByIdAndActive(playerId, true);
     }
 
     @Override

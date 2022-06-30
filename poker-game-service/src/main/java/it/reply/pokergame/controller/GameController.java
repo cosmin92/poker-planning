@@ -1,26 +1,32 @@
 package it.reply.pokergame.controller;
 
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.model.ErrorResponseModel;
-import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.service.GameService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
 
 @Validated
 @RestController
@@ -117,5 +123,11 @@ public class GameController {
     @PostMapping("/getPlayerList")
     public ResponseEntity<List<PlayerDto>> getPlayerList(@RequestParam(value = "idGame", required = true) Long idGame) {
         log.info("Entered endpoint: POST '/game/getPlayerList");
-        return ResponseEntity.ok(gameService.getPlayerList(idGame));}
+        return ResponseEntity.ok(gameService.getPlayerList(idGame));
+    }
+
+    @GetMapping(path = "/{idGame}/invite/{idPlayer}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> invitePlayer(@PathVariable("idGame") Long idGame, @PathVariable("idPlayer") Long idPlayer) {
+        return ResponseEntity.ok().body(gameService.invitePlayer(idGame, idPlayer));
+    }
 }
