@@ -9,7 +9,7 @@ interface Props {
 async function createGame(game: GameCreation) {
     try {
         const { data } = await axios.post<GameCreationInterface>(
-            'http://localhost:8080/api/gameCreation',
+            `${process.env.REACT_APP_CREATE_GAME}`,
             { gameName: game.gameName, playLink: game.playLink, adminId: game.adminId },
             {
                 headers: {
@@ -27,7 +27,7 @@ async function createGame(game: GameCreation) {
             console.log('error: ', error.message);
             return error.message;
         } else {
-            console.log('unexpected: ', error)
+            console.log('unexpected: ', error);
         }
     }
 }
