@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import it.reply.pokergame.dto.GameValidationDto;
+import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.model.ErrorResponseModel;
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.service.GameService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Validated
 @RestController
@@ -96,4 +98,24 @@ public class GameController {
         log.info("Entered endpoint: POST '/game/addVotation'");
         return ResponseEntity.ok(gameService.addVotation(idGame, idPlayer, vote));
     }
+
+
+    @Operation(
+            summary = "Get information of game",
+            description = "Get Game",
+            tags = { "game Controller" },
+            responses = {
+                    @ApiResponse(
+                            description = "Ok",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    ),
+                    @ApiResponse(description = "Not found", responseCode = "404", content =  @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseModel.class))),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
+            }
+    )
+    @PostMapping("/getPlayerList")
+    public ResponseEntity<List<PlayerDto>> getPlayerList(@RequestParam(value = "idGame", required = true) Long idGame) {
+        log.info("Entered endpoint: POST '/game/getPlayerList");
+        return ResponseEntity.ok(gameService.getPlayerList(idGame));}
 }

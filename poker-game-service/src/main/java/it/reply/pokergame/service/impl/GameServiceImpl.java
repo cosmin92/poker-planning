@@ -3,9 +3,11 @@ package it.reply.pokergame.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.dto.GameValidationDto;
+import it.reply.pokergame.dto.PlayerDto;
 import it.reply.pokergame.dto.VotationDto;
 import it.reply.pokergame.exception.PokerException;
 import it.reply.pokergame.mapper.GameMapper;
+import it.reply.pokergame.mapper.PlayerMapper;
 import it.reply.pokergame.model.entity.Game;
 import it.reply.pokergame.model.entity.Player;
 import it.reply.pokergame.model.entity.Votation;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,9 +38,7 @@ public class GameServiceImpl implements GameService {
 
     private final PlayerService playerService;
 
-    private final ObjectMapper mapper = new ObjectMapper();
-
-
+    private final PlayerMapper playerMapper;
 
     @Override
     public Long gameCreation(GameValidationDto dto) {
@@ -93,10 +94,10 @@ public class GameServiceImpl implements GameService {
 
         if (!ch) {
              currentVote = Votation.builder()
-                    .voteName(vote)
-                    .qta(1)
+                     .voteName(vote)
+                     .qta(1)
                      .game(currentGame)
-                    .build();
+                     .build();
 
             currentGame.getVotation().add(currentVote);
         }
@@ -105,8 +106,14 @@ public class GameServiceImpl implements GameService {
         gameRepository.save(currentGame);
 
         return gameMapper.mapFromEntityToDto(currentGame);
+    }
 
+    @Override
+    public List<PlayerDto> getPlayerList(Long idGame) {
 
+        Optional<Game> currentGame = gameRepository.findById(idGame);
 
+        if(currentGame.isPresent()) return playerMapper.mapFromPlayerListEntityToDto(currentGame.orElseThrow().getPlayers());
+        else throw new PokerException(HttpStatus.NOT_FOUND,"not result for this id :"+idGame);
     }
 }
