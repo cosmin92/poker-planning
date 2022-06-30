@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import it.reply.pokergame.dto.GameCreationOutputDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class GameServiceImpl implements GameService {
     private final static String FCM_TOKEN = "FCM_TOKEN_DA_CONDIVIDERE_CON_FE";
 
     @Override
-    public Long gameCreation(GameValidationDto dto) {
+    public GameCreationOutputDto gameCreation(GameValidationDto dto){
 
         Player admin = playerService.updatePlayerRole(dto.getPlayerId(), RoleEnum.ADMIN.toString());
 
@@ -72,8 +73,15 @@ public class GameServiceImpl implements GameService {
 
         gameRepository.save(newGame);
 
-        return newGame.getId();
+    GameCreationOutputDto outputDto =
+        GameCreationOutputDto.builder()
+            .gameId(newGame.getId())
+            .playerId(dto.getPlayerId())
+            .playLink(newGame.getPlayLink())
+            .gameName(dto.getGameName())
+            .build();
 
+    return outputDto;
     }
 
     @Override

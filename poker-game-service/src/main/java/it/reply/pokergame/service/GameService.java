@@ -1,5 +1,6 @@
 package it.reply.pokergame.service;
 
+import it.reply.pokergame.dto.GameCreationOutputDto;
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.dto.PlayerDto;
@@ -10,7 +11,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 
 public interface GameService {
 
-    Long gameCreation(GameValidationDto dto);
+    GameCreationOutputDto gameCreation(GameValidationDto dto);
 
     GameDto findGame(Long gameId);
 

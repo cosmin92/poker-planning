@@ -3,6 +3,7 @@ package it.reply.pokergame.controller;
 import java.net.URI;
 import java.util.List;
 
+import it.reply.pokergame.dto.GameCreationOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,8 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+   // @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/gameCreation")
     @Operation(
             summary = "Get information of game",
             description = "Get Game",
@@ -55,12 +57,13 @@ public class GameController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content())
             }
     )
-    public ResponseEntity<String> gameCreation(@RequestBody GameValidationDto dto) {
-        log.info("Entered endpoint: POST '/game/gameCreation'");
-        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{gameId}")
-                .buildAndExpand(gameService.gameCreation(dto)).toUri();
-
-        return ResponseEntity.created(location).build();
+    public ResponseEntity<GameCreationOutputDto> gameCreation(@RequestBody GameValidationDto dto) {
+//        log.info("Entered endpoint: POST '/game/gameCreation'");
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{gameId}")
+//                .buildAndExpand(gameService.gameCreation(dto)).toUri();
+//
+//        return ResponseEntity.created(location).build();
+        return ResponseEntity.ok(gameService.gameCreation(dto));
     }
 
 
