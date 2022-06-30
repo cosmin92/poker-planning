@@ -14,10 +14,10 @@ function App() {
   //Le righe seguenti (fino al return) sono state inserite per una prova e per dei test.
   //Questa parte dovrà essere implementata nella parte riguardante la creazione del game ed eliminata da qui
   //insieme alla chiamata <Route path='/gamearea' element={<GameArea game={game!} />} />
-  const playerTest3: Player = { id: 3, username: "adrian", role: "admin", vote: 0, gameId: 1 };
+  const playerTest3: Player = { id: 1, username: "adrian", role: "admin", vote: 0, gameId: 1 };
   const playersTest: Player[] = [];
   playersTest.push(playerTest3);
-  const gameTest: Game = { id: 3, gameName: "test", players:playersTest}
+  const gameTest: Game = { id: 1, gameName: "test", players:playersTest}
   const [game, setGame] = useState<Game>(gameTest);
   return (
     <div>

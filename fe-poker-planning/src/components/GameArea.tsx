@@ -40,7 +40,7 @@ export default function GameArea<GameProps>({game}: {game: Game}) {
             </div>
             <div className='Footer'>
                 <div className='text-nearFooter'>Choose your card 👇</div>
-                <div><CardPicker currentPlayerId={2} /> </div>
+                <div><CardPicker currentPlayerId={1} /> </div>
             </div>
         </>
     )
