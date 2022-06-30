@@ -1,8 +1,11 @@
-import { PoweroffOutlined } from '@ant-design/icons';
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import React, { useState } from 'react';
 
-const ButtonLoading: React.FC = () => {
+interface Props {
+  gameName?: string,
+}
+
+const ButtonLoading: React.FC<Props> = ({ gameName }): JSX.Element => {
   const [loadings, setLoadings] = useState<boolean[]>([]);
 
   const enterLoading = (index: number) => {
@@ -18,7 +21,9 @@ const ButtonLoading: React.FC = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-    }, 6000);
+    }, 2000);
+
+    console.log(gameName);
   };
 
   return (
