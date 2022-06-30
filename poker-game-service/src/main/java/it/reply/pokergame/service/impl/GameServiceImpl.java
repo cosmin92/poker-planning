@@ -1,11 +1,18 @@
 package it.reply.pokergame.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.dto.PlayerDto;
-import it.reply.pokergame.dto.VotationDto;
 import it.reply.pokergame.exception.PokerException;
+import it.reply.pokergame.exception.ResourceNotFoundException;
 import it.reply.pokergame.mapper.GameMapper;
 import it.reply.pokergame.mapper.PlayerMapper;
 import it.reply.pokergame.model.entity.Game;
@@ -18,12 +25,6 @@ import it.reply.pokergame.service.PlayerService;
 import it.reply.pokergame.util.RoleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -121,5 +122,19 @@ public class GameServiceImpl implements GameService {
 
         if(currentGame.isPresent()) return playerMapper.mapFromPlayerListEntityToDto(currentGame.orElseThrow().getPlayers());
         else throw new PokerException(HttpStatus.NOT_FOUND,"not result for this id :"+idGame);
+    }
+
+    @Override
+    public String invitePlayer(Long idGame, Long idPlayer) {
+        Player player = playerService.getPlayer(idPlayer)
+            .orElseThrow(() -> new ResourceNotFoundException(Player.class.getName(), idPlayer.toString()));
+
+        Game game = gameRepository.findById(idGame)
+            .orElseThrow(() -> new ResourceNotFoundException(Game.class.getName(), idGame.toString()));
+
+        player.setGame(game);
+        playerService.save(player);
+
+        return game.getPlayLink();
     }
 }

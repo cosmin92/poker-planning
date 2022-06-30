@@ -1,6 +1,9 @@
 import { Button, Modal } from 'antd';
 import React, { useState } from 'react';
+import GameHistoryInterface from '../repository/GameHistoryInterface';
+import GameHistoryInterfaceImpl from '../repositoryImpl/GameHistoryInterfaceImpl';
 import HistoryTable from './HistoryTable';
+import { History } from '../model/History';
 
 const ModalSettings: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

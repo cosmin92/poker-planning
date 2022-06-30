@@ -15,4 +15,6 @@ public interface GameService {
     GameDto addVotation(Long idGame, Long idPlayer, Integer vote);
 
     List<PlayerDto> getPlayerList(Long idGame);
+
+    String invitePlayer(Long idGame, Long idPlayer);
 }

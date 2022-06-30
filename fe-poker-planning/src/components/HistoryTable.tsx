@@ -1,46 +1,71 @@
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import React from 'react';
+import GameHistoryInterface from '../repository/GameHistoryInterface';
+import GameHistoryInterfaceImpl from '../repositoryImpl/GameHistoryInterfaceImpl';
 
 interface DataType {
-  key: string;
   name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  result: number;
+  average: number;
+  mostVotedCard: number,
+  time: Date;
+  totalPlayersVoted: number;
 }
 
 const columns: ColumnsType<DataType> = [
   {
     title: 'Issue',
-    dataIndex: 'issue',
-    key: 'issue'
+    dataIndex: 'name',
+    key: 'name'
   },
   {
     title: 'Result',
-    dataIndex: 'Result',
-    key: 'Result'
+    dataIndex: 'result',
+    key: 'result'
   },
   {
-    title: 'Agreement',
-    dataIndex: 'Agreement',
-    key: 'Agreement'
+    title: 'Average',
+    dataIndex: 'average',
+    key: 'average'
   },
+
   {
-    title: 'Players Voted/Total',
-    key: 'PlayersVote',
-    dataIndex: 'PlayersVote'
+    title: 'Most Voted Card',
+    key: 'mostVotedCard',
+    dataIndex: 'mostVotedCard'
   },
+
   {
     title: 'Time',
-    key: 'Time',
-    dataIndex: 'Time'
+    key: 'time',
+    dataIndex: 'time'
   },
+
+  {
+    title: 'Players Voted/Total',
+    key: 'totalPlayersVoted',
+    dataIndex: 'totalPlayersVoted'
+  },
+  
 ];
 
 const data: DataType[] = [
+  {
+    name: '1',
+    result: 5,
+    average: 6,
+    mostVotedCard: 3,
+    time: new Date(),
+    totalPlayersVoted:5
+  },
 ];
 
-const HistoryTable: React.FC = () => <Table columns={columns} dataSource={data} />;
+const gameHistoryInterface: GameHistoryInterface = new GameHistoryInterfaceImpl;
+
+function HistoryTable() {
+  let list = gameHistoryInterface.getVotingHistory(4);
+  return <Table columns={columns} dataSource={list} />;
+}
 
 export default HistoryTable;

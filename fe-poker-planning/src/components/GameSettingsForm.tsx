@@ -1,7 +1,11 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import React from 'react';
+import GameSettingsInterface from '../repository/GameSettingsInterface';
+import GameSettingsInterfaceImpl from '../repositoryImpl/GameSettingsInterfaceImpl';
 
 const GameSettingsForm: React.FC = () => {
+  const gameSettingsInterface: GameSettingsInterface = new GameSettingsInterfaceImpl;
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
@@ -34,6 +38,12 @@ const GameSettingsForm: React.FC = () => {
         rules={[{ required: true, message: 'Please input the name of the game!' }]}
       >
         <Input />
+      </Form.Item>
+
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Button type="primary" htmlType="submit" onClick={() =>gameSettingsInterface.setGameSettings((document.getElementById("basic_GameOwner") as HTMLInputElement).value, (document.getElementById("basic_GameName") as HTMLInputElement).value)}>
+          Change Game Settings
+        </Button>
       </Form.Item>
 
     </Form>
