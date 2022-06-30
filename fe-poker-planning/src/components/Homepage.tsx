@@ -8,9 +8,14 @@ const Homepage = () => {
 
   const [user, setUser] = useState(false);
 
+  function fakeLogin() {
+    setUser(!user);
+  }
+
   return (
     <>
     <HomepageNavbar />
+    <button onClick={() => fakeLogin()}>Simulate logged in/out user</button>
 
 		<div className='home-items'>
 				<h1>Scrum Poker for agile development teams</h1>
@@ -18,7 +23,7 @@ const Homepage = () => {
 
         <div className={user ? '' : 'hidden' }>
           <Link to='/starting'>
-            <Button type="primary" shape="round">
+            <Button type="primary" shape="round" size='large'>
                   Start new game
             </Button>
           </Link>

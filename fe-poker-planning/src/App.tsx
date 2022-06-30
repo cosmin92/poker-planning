@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
-import StartingPage from './components/NewGame';
+import NewGame from './components/NewGame';
 import GameArea from './components/GameArea';
 import { Game } from './model/Game';
 import { Player } from './model/Player';
@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/starting' element={<StartingPage />} />
+          <Route path='/starting' element={<NewGame />} />
           <Route path='/gamearea' element={<GameArea game={game!} />} />
         </Routes>
       </BrowserRouter>
