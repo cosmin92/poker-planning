@@ -7,25 +7,23 @@ import Table from './Table';
 import { Player } from '../model/Player';
 import LayoutNavbar  from './LayoutNavbar';
 import { Game } from '../model/Game';
-
-const playerTest: Player = { id: 1, username: "adrian", role: "admin", vote: 0, gameId: 1 };
-const playerTest2: Player = { id: 2, username: "adrian", role: "admin", vote: 0, gameId: 1 };
-const playerTest3: Player = { id: 3, username: "adrian", role: "admin", vote: 0, gameId: 1 };
-const playersTest: Player[] = [];
-playersTest.push(playerTest, playerTest2, playerTest3);
+import PlayerInterface from '../repository/PlayerInterface';
+import PlayerInterfaceImpl from '../repositoryImpl/PlayerInterfaceImpl';
 
 interface GameProps{
     game: Game;
+    currentPlayerId: number;
 }
 
-export default function GameArea<GameProps>({game}: {game: Game}) {
+export default function GameArea<GameProps>({game, currentPlayerId}: {game: Game, currentPlayerId: number}) {
 
+    const playersInterface: PlayerInterface = new PlayerInterfaceImpl();
 
     const [players, setPlayers] = useState<Player[]>([]);
     
       useEffect(() => {
-        setPlayers(playersTest);
-      });
+        setPlayers(playersInterface.getAllPlayers(game.id));
+      }, []);
 
     return (
         <>
@@ -40,7 +38,7 @@ export default function GameArea<GameProps>({game}: {game: Game}) {
             </div>
             <div className='Footer'>
                 <div className='text-nearFooter'>Choose your card 👇</div>
-                <div><CardPicker currentPlayerId={1} /> </div>
+                <div><CardPicker currentPlayer={currentPlayerId} /> </div>
             </div>
         </>
     )

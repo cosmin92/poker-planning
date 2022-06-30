@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/starting' element={<NewGame />} />
-          <Route path='/gamearea' element={<GameArea game={game!} />} />
+          <Route path='/gamearea' element={<GameArea game={game!} currentPlayerId={game.players[0].id} />} />
         </Routes>
       </BrowserRouter>
     </div>

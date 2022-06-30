@@ -27,6 +27,10 @@
     align-items: center;
 }
 
+.text-margin{
+    margin-left: 15px;
+}
+
 .player-card-content{
     display: flex;
     flex-direction: column;
