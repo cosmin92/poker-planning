@@ -47,9 +47,9 @@ public class GameServiceImpl implements GameService {
 
         List<Player> playerList = new ArrayList<>();
         playerList.add(admin);
-    Game newGame = Game.builder()
+
+            Game newGame = Game.builder()
                 .gameName(dto.getGameName())
-                .playLink(dto.getGameLink())
                 .players(playerList)
                 .build();
 
@@ -57,7 +57,13 @@ public class GameServiceImpl implements GameService {
 
         admin.setGame(newGame);
 
-        return gameRepository.save(newGame).getId();
+        newGame = gameRepository.save(newGame);
+
+        newGame.setPlayLink(dto.getPlayLink()+"/"+newGame.getId());
+
+        gameRepository.save(newGame);
+
+        return newGame.getId();
 
     }
 
