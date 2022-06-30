@@ -37,7 +37,7 @@ const ButtonLoading: React.FC<Props> = ({ gameName }): JSX.Element => {
       game.adminId = 0;
       createGame(game);
       console.log(gameName);
-      navigate('/' + game.playLink);
+      navigate('/gamearea');
     }, 2000);
 
   };
