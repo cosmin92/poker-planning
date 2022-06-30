@@ -6,13 +6,15 @@ import it.reply.pokergame.dto.PlayerDto;
 
 import java.util.List;
 
+import com.google.firebase.messaging.FirebaseMessagingException;
+
 public interface GameService {
 
     Long gameCreation(GameValidationDto dto);
 
     GameDto findGame(Long gameId);
 
-    GameDto addVotation(Long idGame, Long idPlayer, Integer vote);
+    GameDto addVotation(Long idGame, Long idPlayer, Integer vote) throws FirebaseMessagingException;
 
     List<PlayerDto> getPlayerList(Long idGame);
 

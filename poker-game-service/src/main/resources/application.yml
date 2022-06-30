@@ -29,3 +29,7 @@ spring:
     h2:
       console:
         enabled: true
+
+
+app:
+  firebase-configuration-file: firebase-service-account.json

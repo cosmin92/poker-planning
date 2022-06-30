@@ -7,29 +7,31 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 
+import it.reply.pokergame.model.PushNotification;
 import lombok.RequiredArgsConstructor;
-/*
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
-public class FirebaseMessagingService {
+public class FCMService {
 
     private final FirebaseMessaging firebaseMessaging;
 
-    public String sendNotification(Note note, String token) throws FirebaseMessagingException {
+    public String sendNotification(PushNotification note) throws FirebaseMessagingException {
 
         Notification notification = Notification
             .builder()
-            .setTitle(note.getSubject())
-            .setBody(note.getContent())
+            .setTitle(note.getTitle())
+            .setBody(note.getMessage())
             .build();
 
         Message message = Message
             .builder()
-            .setToken(token)
+            .setToken(note.getToken())
             .setNotification(notification)
-            .putAllData(note.getData())
             .build();
 
         return firebaseMessaging.send(message);
     }
-}*/
+}

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.google.firebase.messaging.FirebaseMessagingException;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -100,7 +102,7 @@ public class GameController {
     @PostMapping("/addVotation")
     public ResponseEntity<GameDto> addVotation(@RequestParam(value = "idGame", required = true) Long idGame,
                                                @RequestParam(value = "idPlayer", required = true) Long idPlayer,
-                                               @RequestParam(value = "vote", required = true) Integer vote) {
+                                               @RequestParam(value = "vote", required = true) Integer vote) throws FirebaseMessagingException {
         log.info("Entered endpoint: POST '/game/addVotation'");
         return ResponseEntity.ok(gameService.addVotation(idGame, idPlayer, vote));
     }

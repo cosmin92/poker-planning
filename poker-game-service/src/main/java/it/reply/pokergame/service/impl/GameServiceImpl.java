@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.google.firebase.messaging.FirebaseMessagingException;
+
 import it.reply.pokergame.dto.GameDto;
 import it.reply.pokergame.dto.GameValidationDto;
 import it.reply.pokergame.dto.PlayerDto;
@@ -15,11 +17,13 @@ import it.reply.pokergame.exception.PokerException;
 import it.reply.pokergame.exception.ResourceNotFoundException;
 import it.reply.pokergame.mapper.GameMapper;
 import it.reply.pokergame.mapper.PlayerMapper;
+import it.reply.pokergame.model.PushNotification;
 import it.reply.pokergame.model.entity.Game;
 import it.reply.pokergame.model.entity.Player;
 import it.reply.pokergame.model.entity.Votation;
 import it.reply.pokergame.repository.GameRepository;
 import it.reply.pokergame.repository.PlayerRepository;
+import it.reply.pokergame.service.FCMService;
 import it.reply.pokergame.service.GameService;
 import it.reply.pokergame.service.PlayerService;
 import it.reply.pokergame.util.RoleEnum;
@@ -40,6 +44,10 @@ public class GameServiceImpl implements GameService {
     private final PlayerService playerService;
 
     private final PlayerMapper playerMapper;
+
+    private final FCMService fcmService;
+
+    private final static String FCM_TOKEN = "FCM_TOKEN_DA_CONDIVIDERE_CON_FE";
 
     @Override
     public Long gameCreation(GameValidationDto dto) {
@@ -77,7 +85,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameDto addVotation(Long idGame, Long idPlayer, Integer vote) {
+    public GameDto addVotation(Long idGame, Long idPlayer, Integer vote) throws FirebaseMessagingException {
 
         boolean ch = true;
 
@@ -111,6 +119,15 @@ public class GameServiceImpl implements GameService {
 
         playerRepository.save(admin);
         gameRepository.save(currentGame);
+
+        //TODO: Send push notification here -- Da testare
+         fcmService.sendNotification(
+             PushNotification.builder()
+             .title("notification")
+             .message("notif. message")
+             .token(FCM_TOKEN)
+             .build()
+         );
 
         return gameMapper.mapFromEntityToDto(currentGame);
     }
