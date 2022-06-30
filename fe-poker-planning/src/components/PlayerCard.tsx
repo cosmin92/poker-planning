@@ -7,8 +7,8 @@ export default function PlayerCard({ player }: { player: Player }) {
   return (
     <div className='player-info'>
       <div className='player-card-header'>
-        <div className='text-margin'>
-          {player.username} <br /> {player.role}
+        <div className='player-card-header-text'>
+          {player.username}
         </div>
       </div>
       <div className='player-card-content'>

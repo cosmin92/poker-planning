@@ -18,12 +18,12 @@ interface GameProps{
 export default function GameArea<GameProps>({game, currentPlayerId}: {game: Game, currentPlayerId: number}) {
 
     const playersInterface: PlayerInterface = new PlayerInterfaceImpl();
-
+    const gameId: number = 1;
     const [players, setPlayers] = useState<Player[]>([]);
     
       useEffect(() => {
-        setPlayers(playersInterface.getAllPlayers(game.id));
-      }, []);
+         setPlayers(playersInterface.getAllPlayers(gameId));
+      });
 
     return (
         <>

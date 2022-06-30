@@ -26,9 +26,13 @@
     height: 40px;
     align-items: center;
 }
-
-.text-margin{
-    margin-left: 15px;
+.player-card-header-text{
+    display: block;
+    margin-right: auto;
+    width: 100%;
+    font-size: 0.750rem;
+    font-weight: bold;
+    overflow: hidden;
 }
 
 .player-card-content{
