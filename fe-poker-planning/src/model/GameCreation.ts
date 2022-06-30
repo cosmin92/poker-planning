@@ -1,5 +1,5 @@
 export type GameCreation = {
-    gameName: string;
+    gameName?: string;
     playLink: string;
     adminId: number;
 }

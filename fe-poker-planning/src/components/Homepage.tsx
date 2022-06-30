@@ -5,7 +5,7 @@ import '../css/HomepageStyle.css';
 import HomepageNavbar from './HomepageNavbar';
 
 const Homepage = () => {
-
+  // true if user is logged in
   const [user, setUser] = useState(false);
 
   function fakeLogin() {
