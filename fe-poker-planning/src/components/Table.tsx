@@ -17,8 +17,7 @@ export default function Table<GameProps>({ game }: { game: Game }) {
 
   function inviteLink() {
     const dummy = document.createElement('input');
-    const url = `${process.env.REACT_APP_JOIN_GAME}/${game.id}`;
-    alert(url);
+    const url = `${process.env.REACT_APP_JOIN_GAME}/${game.id}/invite/`;
     document.body.appendChild(dummy);
     dummy.value = url;
     dummy.select();
