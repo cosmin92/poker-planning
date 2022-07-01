@@ -8,18 +8,22 @@ interface Props {
 
 async function createGame(game: GameCreation) {
     try {
+
+        const token = sessionStorage.getItem("access-token")?.split('"')[1];
+
         const { data } = await axios.post<GameCreationInterface>(
             `${process.env.REACT_APP_CREATE_GAME}`,
-            { gameName: game.gameName, playLink: game.playLink, playerId: 1 },
+            { gameName: game.gameName, playLink: game.playLink, playerId: game.adminId },
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    Accept: 'application/json'
+                    Accept: 'application/json',
+                    "Authorization" : `Bearer ${token}`,
                 },
             },
         );
 
-        console.log(JSON.stringify(data));
+        
         return data;
 
     } catch (error) {

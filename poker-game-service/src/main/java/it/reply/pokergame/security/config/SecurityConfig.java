@@ -37,13 +37,13 @@ public class SecurityConfig {
             .cors().and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests()
+      /* http.authorizeRequests()
             // don't authenticate this particular request
             .antMatchers("/api/players/signup", "/api/players/authenticate").permitAll()
             // all other requests need to be authenticated
             .antMatchers(SecurityConstants.H2_CONSOLE).permitAll()
             .anyRequest().authenticated();
-
+*/
         // add a filter to validate the tokens with every request
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

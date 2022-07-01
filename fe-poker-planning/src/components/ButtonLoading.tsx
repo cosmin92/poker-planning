@@ -20,7 +20,7 @@ const ButtonLoading: React.FC<Props> = ({ gameName }): JSX.Element => {
       return newLoadings;
     });
 
-    setTimeout(() => {
+    setTimeout(async () => {
       setLoadings(prevLoadings => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
@@ -33,11 +33,12 @@ const ButtonLoading: React.FC<Props> = ({ gameName }): JSX.Element => {
         adminId: 0,
       };
       game.gameName = gameName;
+      game.adminId =  Number(sessionStorage.getItem("userId"));
       game.playLink = '' + game.adminId + gameName;
-      game.adminId = 0;
-      createGame(game);
-      console.log(gameName);
-      navigate('/gamearea');
+      let gameInfo = await createGame(game);
+      JSON.stringify(gameInfo);
+      console.log(gameInfo);
+      navigate(`/gamearea/${game.gameName}/${1}/${game.playLink}/${game.adminId}`);
     }, 2000);
 
   };

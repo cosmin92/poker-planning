@@ -9,6 +9,8 @@ export class LoginInterfaceImpl implements LoginInterface{
         try{
             axios.post(url,  {} ,{ params: { username: player.username, password: player.password}})
             .then((response) => {
+                sessionStorage.setItem("access-token", JSON.stringify(response.data.access));
+                sessionStorage.setItem("userId", JSON.stringify(response.data.userId));
                 return response;
             });
         }catch (e){

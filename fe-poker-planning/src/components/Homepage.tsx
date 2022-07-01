@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import '../css/HomepageStyle.css';
@@ -11,6 +11,14 @@ const Homepage = () => {
   function fakeLogin() {
     setUser(!user);
   }
+
+  useEffect(() => {
+    if(sessionStorage.getItem("access-token") !== null){
+      setUser(true);
+    }else{
+      setUser(false);
+    }
+  },[user])
 
   return (
     <>

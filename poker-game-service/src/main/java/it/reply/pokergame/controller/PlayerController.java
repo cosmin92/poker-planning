@@ -40,8 +40,13 @@ public class PlayerController {
     private final CustomUserDetailsService customUserDetailsService;
 
     @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> registration(@RequestBody PlayerRegistrationDto playerRegistrationDto) {
-
+    public ResponseEntity<String> registration(@RequestParam("username") String username, @RequestParam("password") String password,
+                                               @RequestParam("ruolo") String ruolo) {
+        log.info("Entered endpoint: GET '/game/{}'", username+ " " + password);
+        PlayerRegistrationDto playerRegistrationDto = new PlayerRegistrationDto();
+        playerRegistrationDto.setPassword(password);
+        playerRegistrationDto.setUsername(username);
+        playerRegistrationDto.setRole(ruolo);
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{playerId}")
             .buildAndExpand(playerService.registration(
                 Mappers.toPlayer(playerRegistrationDto)

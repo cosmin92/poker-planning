@@ -29,6 +29,7 @@ const Login: React.FC = () => {
     console.log('Success:', values);
     const LoginInterface: LoginInterface = new LoginInterfaceImpl();
     LoginInterface.login(values);
+    window.location.reload();
   };
 
   const onFinishFailed = (errorInfo: any) => {
