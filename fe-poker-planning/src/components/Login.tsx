@@ -1,5 +1,7 @@
 import { Button, Checkbox, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
+import { LoginInterface } from '../repository/LoginInterface';
+import { LoginInterfaceImpl } from '../repositoryImpl/LoginInterfaceImpl';
 
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +27,8 @@ const Login: React.FC = () => {
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    const LoginInterface: LoginInterface = new LoginInterfaceImpl();
+    LoginInterface.login(values);
   };
 
   const onFinishFailed = (errorInfo: any) => {

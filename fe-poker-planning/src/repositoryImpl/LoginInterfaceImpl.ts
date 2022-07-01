@@ -1,9 +1,10 @@
 import axios from "axios";
+import { PlayerCreation } from "../model/PlayerCreation";
 import { LoginInterface } from "../repository/LoginInterface";
 
 export class LoginInterfaceImpl implements LoginInterface{
 
-    login(player: {username: string; password: string}): void {
+    login(player: PlayerCreation): void {
         const url = `${process.env.REACT_APP_LOGIN}`;
         try{
             axios.post(url, player)
