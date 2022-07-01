@@ -10,7 +10,7 @@ async function createGame(game: GameCreation) {
     try {
         const { data } = await axios.post<GameCreationInterface>(
             `${process.env.REACT_APP_CREATE_GAME}`,
-            { gameName: game.gameName, playLink: game.playLink, adminId: game.adminId },
+            { gameName: game.gameName, playLink: game.playLink, playerId: 1 },
             {
                 headers: {
                     'Content-Type': 'application/json',
