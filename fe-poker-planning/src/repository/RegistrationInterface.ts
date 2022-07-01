@@ -1,3 +1,5 @@
+import { PlayerCreation } from "../model/PlayerCreation";
+
 export interface RegistrationInterface {
-    registration(player: {username: string; password: string}): void;
+    registration(player: PlayerCreation): void;
 }

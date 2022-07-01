@@ -1,5 +1,7 @@
 import { Button, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
+import { RegistrationInterface } from '../repository/RegistrationInterface';
+import { RegistrationInterfaceImpl } from '../repositoryImpl/RegisterInterfaceImpl';
 
 const Register: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +27,8 @@ const Register: React.FC = () => {
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    const RegistrationInterface: RegistrationInterface = new RegistrationInterfaceImpl();
+    RegistrationInterface.registration(values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
