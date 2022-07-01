@@ -99,6 +99,11 @@ const Register: React.FC = () => {
       >
         <Input.Password />
       </Form.Item>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button type="primary" htmlType="submit" onClick={() => handleOk()}>
+                  Submit
+                </Button>
+              </Form.Item>
         </Form>
       </Modal>
     </>
