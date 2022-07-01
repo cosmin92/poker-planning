@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
 
-const Register = () => {
+const Register: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -21,7 +21,7 @@ const Register = () => {
     setVisible(false);
   };
 
-  // login
+  // register
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -33,7 +33,7 @@ const Register = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" shape="round" size="large" onClick={showModal}>
         Register
       </Button>
       <Modal

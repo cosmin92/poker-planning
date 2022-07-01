@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -33,7 +33,7 @@ const Login = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" shape="round" size="large" onClick={showModal}>
         Login
       </Button>
       <Modal

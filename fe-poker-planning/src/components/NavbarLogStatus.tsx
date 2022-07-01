@@ -2,21 +2,18 @@ import Logged from "./Logged";
 import Login from "./Login";
 import Register from "./Register";
 
-const NavbarLogStatus = () => {
-    // this is a moc, it will be changed with the access token
-    const test = 'a';
+const NavbarLogStatus: React.FC = () => {
+    const token = sessionStorage.getItem('token');
 
     return (
         <>
-            {/* {test === 'a' && <Logged />}
-            {test !== 'a' && (
+            {token !== null && <Logged />}
+            {token === null && (
                 <>
                     <Register />
                     <Login />
                 </>
-            )} */}
-            <Register />
-            <Login />
+            )}
         </>
     )
 }

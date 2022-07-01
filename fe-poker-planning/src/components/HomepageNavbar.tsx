@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import '../css/HomepageNavbarStyle.css';
 import NavbarLogStatus from './NavbarLogStatus';
 
-const HomepageNavbar = () => {
+const HomepageNavbar: React.FC = () => {
 
   return (
     <>

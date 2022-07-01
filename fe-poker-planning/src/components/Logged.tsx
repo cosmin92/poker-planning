@@ -17,7 +17,7 @@ const menu = (
   />
 );
 
-const Logged = () => (
+const Logged: React.FC = () => (
   <Dropdown overlay={menu}>
     <a onClick={(e) => e.preventDefault()}>
       <Space>
