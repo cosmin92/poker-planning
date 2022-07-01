@@ -7,7 +7,7 @@ export class LoginInterfaceImpl implements LoginInterface{
     login(player: PlayerCreation): void {
         const url = `${process.env.REACT_APP_LOGIN}`;
         try{
-            axios.post(url, player)
+            axios.post(url,  {} ,{ params: { username: player.username, password: player.password}})
             .then((response) => {
                 return response;
             });
