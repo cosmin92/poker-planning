@@ -1,5 +1,5 @@
 import { ulid } from "ulid";
-import { addPlayerToGameInStore, getGameFromStore, getPlayersFromStore, getPlayerFromStore, updatePlayerInStore } from "../repository/firebase";
+import { addPlayerToGameInStore, getGameFromStore, getPlayerFromStore, updatePlayerInStore } from "../repository/firebase";
 import { getPlayerGamesFromCache, isGameInPlayerCache, updatePlayerGamesInCache } from "../repository/local";
 import { Player } from "../types/Player";
 import { PlayerGame } from "../types/PlayerGame";
@@ -62,10 +62,4 @@ export const addPlayerToGame = async (gameId: string, playerName: string): Promi
     await addPlayerToGameInStore(gameId, newPlayer);
 
     return true;
-};
-
-export const resetGame = async (gameId: string) => {
-    const players = await getPlayersFromStore(gameId);
-
-    // updatePlayerInStore();
 };
