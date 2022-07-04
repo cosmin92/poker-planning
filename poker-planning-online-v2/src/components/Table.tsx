@@ -9,6 +9,7 @@ import "../css/Table.css";
 import { finishGame } from "../service/Games";
 import React from "react";
 import { resetGame } from '../service/Players';
+import { Button } from 'antd';
 
 interface TableProps {
   game: Game;
@@ -64,7 +65,7 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
           </button>
         </div>
       </div>
-      <button onClick={() => resetGame(game.id, "😴")}>New Game</button>
+      <Button className="text-nearFooter" onClick={() => resetGame(game.id, "😴")}>New Game</Button>
       <Snackbar
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
         open={showCopiedMessage}
