@@ -74,6 +74,7 @@ export const resetGame = async (gameId: string) => {
         };
 
         await updatePlayerInStore(gameId, updatedPlayer);
+        await updateGameStatus(gameId);
     })
 
     // if (gameId) {
