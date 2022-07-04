@@ -78,7 +78,7 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
         </div>
       </div>
       {isModerator(game.createdBy, currentPlayerId) &&(
-      <Button className="text-nearFooter" onClick={() => resetGame(game.id)}>New Game</Button>
+      <Button className="text-nearFooter" onClick={() => resetGame(game.id)}>Reset Game</Button>
       )}
       <Snackbar
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
