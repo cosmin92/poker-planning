@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Game } from "../types/Game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import "../css/Table.css";
 import { finishGame } from "../service/Games";
 import React from "react";
+import { resetGame } from '../service/Players';
+import { Button } from 'antd';
+import { useHistory } from "react-router-dom";
 
 interface TableProps {
   game: Game;
@@ -16,8 +19,7 @@ interface TableProps {
 
 export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
   
-
-  
+  const history = useHistory();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   function inviteLink() {
@@ -29,6 +31,10 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
     document.execCommand("copy");
     document.body.removeChild(dummy);
     setShowCopiedMessage(true);
+  }
+
+  const exit = () =>{
+    history.push('/');
   }
 
   const isModerator = (moderatorId: string, currentPlayerId: string) => {
@@ -53,6 +59,14 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
             />
             <p className="textUnderButton">Reveal</p>
           </button>
+          <button className="buttonExitStyle">
+            <FontAwesomeIcon
+              icon={faLink}
+              className="exitStyle"
+              onClick={() => exit()}
+            />
+            <p className="textUnderButton">Exit</p>
+          </button>
           <button className="buttonInviteStyle">
             <FontAwesomeIcon
               icon={faLink}
@@ -63,6 +77,7 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
           </button>
         </div>
       </div>
+      <Button className="text-nearFooter" onClick={() => resetGame(game.id)}>New Game</Button>
       <Snackbar
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
         open={showCopiedMessage}

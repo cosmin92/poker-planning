@@ -1,5 +1,5 @@
 import { ulid } from "ulid";
-import { addPlayerToGameInStore, getGameFromStore, getPlayerFromStore, updatePlayerInStore } from "../repository/firebase";
+import { addPlayerToGameInStore, getGameFromStore, getPlayersFromStore, getPlayerFromStore, updatePlayerInStore } from "../repository/firebase";
 import { getPlayerGamesFromCache, isGameInPlayerCache, updatePlayerGamesInCache } from "../repository/local";
 import { Player } from "../types/Player";
 import { PlayerGame } from "../types/PlayerGame";
@@ -20,14 +20,13 @@ export const addPlayer = async (gameId: string, player: Player) => {
     }
 };
 
-export const updatePlayerValue = async (gameId: string, playerId: string, value: number, randomEmoji: string) => {
+export const updatePlayerValue = async (gameId: string, playerId: string, value: number) => {
     const player = await getPlayerFromStore(gameId, playerId);
 
     if (player) {
         const updatedPlayer = {
             ...player,
             value: value,
-            emoji: randomEmoji,
             status: Status.Finished,
         };
         await updatePlayerInStore(gameId, updatedPlayer);
@@ -62,4 +61,40 @@ export const addPlayerToGame = async (gameId: string, playerName: string): Promi
     await addPlayerToGameInStore(gameId, newPlayer);
 
     return true;
+};
+
+export const resetGame = async (gameId: string) => {
+    const players = await getPlayersFromStore(gameId);
+
+    players.forEach(async (player) => {
+        const updatedPlayer: Player = {
+            ...player,
+            status: Status.NotStarted,
+            value: 0,
+        };
+
+<<<<<<< HEAD
+        await updatePlayerInStore(gameId, updatedPlayer);
+    })
+
+    // if (gameId) {
+    //     const updatedPlayers = {
+    //         ...players,
+    //         value: 0,
+    //         status: Status.NotStarted,
+    //     };
+
+    //     updatePlayerInStore(gameId,  );
+    //     await updateGameStatus(gameId);
+    //     return true;
+    // }
+    // return false;
+=======
+        updatePlayerInStore(gameId, ...players);
+        await updateGameStatus(gameId);
+        return true;
+    }
+    return false;
+>>>>>>> 0a5d76ecb7c0335cc350bae4bc22d57ea417dce0
+
 };

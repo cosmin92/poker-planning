@@ -16,7 +16,7 @@ export const CardPicker: React.FC<CardPickerProps>=({game, players, currentPlaye
 
     const playPlayer = (gameId: string, playerId: string, card: number) => {
         if (game.gameStatus !== Status.Finished) {
-          updatePlayerValue(gameId, playerId, card, "❓");
+          updatePlayerValue(gameId, playerId, card);
         }
       };
 
