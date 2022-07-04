@@ -1,6 +1,5 @@
 import { Button, Form, Input } from "antd";
 import React from "react";
-import { setGameName } from "../service/Games";
 import { Game } from "../types/Game";
 
 interface GameSettingsFormProps {
@@ -41,14 +40,6 @@ const GameSettingsForm: React.FC<GameSettingsFormProps> = ({ game }) => {
         <Button
           type="primary"
           htmlType="submit"
-          onClick={() =>
-            setGameName(
-              (document.getElementById("basic_GameOwner") as HTMLInputElement)
-                .value,
-              (document.getElementById("basic_GameName") as HTMLInputElement)
-                .value
-            )
-          }
         >
           Change Game Settings
         </Button>
