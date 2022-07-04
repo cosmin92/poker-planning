@@ -75,7 +75,7 @@ export const resetGame = async (gameId: string, randomEmoji: string) => {
             randomEmoji: "😴",
         };
 
-        updatePlayerInStore(gameId, );
+        updatePlayerInStore(gameId, ...players);
         await updateGameStatus(gameId);
         return true;
     }
