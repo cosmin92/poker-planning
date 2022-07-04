@@ -96,6 +96,7 @@ export const updateGameStatus = async (gameId: string): Promise<boolean> => {
         const status = getGameStatus(players);
         const dataToUpdate = {
             gameStatus: status,
+            average: 0,
         };
         const result = await updateGameDataInStore(gameId, dataToUpdate);
         return result;
