@@ -73,7 +73,6 @@ export const resetGame = async (gameId: string) => {
             value: 0,
         };
 
-<<<<<<< HEAD
         await updatePlayerInStore(gameId, updatedPlayer);
     })
 
@@ -89,12 +88,5 @@ export const resetGame = async (gameId: string) => {
     //     return true;
     // }
     // return false;
-=======
-        updatePlayerInStore(gameId, ...players);
-        await updateGameStatus(gameId);
-        return true;
-    }
-    return false;
->>>>>>> 0a5d76ecb7c0335cc350bae4bc22d57ea417dce0
 
 };
