@@ -1,0 +1,22 @@
+.nav-home-logo {
+    padding: 3vh;
+    display: inline-block;
+
+}
+
+.nav-home-logo h2 {
+    font-style: italic;
+    color: #298dea;
+    float: right;
+    margin-left: 3vh;
+}
+
+.nav-home-welcome {
+    float: right;
+    padding: 3vh;
+    display: flex;
+}
+
+.nav-home-button {
+    margin-left: 3vh;
+}
