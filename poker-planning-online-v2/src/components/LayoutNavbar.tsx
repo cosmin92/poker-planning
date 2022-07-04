@@ -20,9 +20,7 @@ const LayoutNavBar: React.FC<LayoutNavBarProps> = ({game}) => (
         <Col span={12}> <h1>Test</h1></Col>
         <Col span={12}>
          <div style={{float: 'right'}}>
-            <ModalSettings game={game}/>
-             &nbsp;  &nbsp;
-            <ModalHistory/> 
+            <ModalHistory  game={game}/> 
          </div>
       </Col>
       </Row>

@@ -4,6 +4,9 @@ import { addGameToStore, addPlayerToGameInStore, getGameFromStore, getPlayersFro
 import { Player } from "../types/Player";
 import { ulid } from "ulid";
 import { updatePlayerGames } from "./Players";
+import { getPlayerGamesFromCache } from "../repository/local";
+import { PlayerGame } from "../types/PlayerGame";
+import { Game } from '../types/Game';
 
 export const addNewGame = async (newGame: NewGame): Promise<string> => {
     const player = {
@@ -99,3 +102,18 @@ export const updateGameStatus = async (gameId: string): Promise<boolean> => {
     }
     return false;
 };
+
+export const setGameName = async(gameId: string, gameName: string) =>{
+    alert("TO DO")
+}
+
+export const getHistory = async (): Promise<Game[]> => {
+    let gamesList: PlayerGame[] = getPlayerGamesFromCache();
+    let historyList: Game[] = []
+    gamesList.forEach(async function (value) {
+        let game = await getGameFromStore(value.gameId) as Game;
+        
+        historyList.push(game);
+    })
+    return historyList
+}

@@ -1,59 +1,38 @@
-import { Space, Table, Tag } from 'antd';
-import type { ColumnsType } from 'antd/lib/table';
-import React from 'react';
+import {Table} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { getHistory } from '../service/Games';
+import { Game } from '../types/Game';
 
-interface DataType {
-  name: string;
-  result: number;
-  average: number;
-  mostVotedCard: number,
-  time: Date;
-  totalPlayersVoted: number;
-}
-
-const columns: ColumnsType<DataType> = [
+const columns =  [
   {
-    title: 'Issue',
+    title: 'Game name',
     dataIndex: 'name',
     key: 'name'
-  },
-  {
-    title: 'Result',
-    dataIndex: 'result',
-    key: 'result'
   },
   {
     title: 'Average',
     dataIndex: 'average',
     key: 'average'
-  },
-
-  {
-    title: 'Most Voted Card',
-    key: 'mostVotedCard',
-    dataIndex: 'mostVotedCard'
-  },
-
-  {
-    title: 'Time',
-    key: 'time',
-    dataIndex: 'time'
-  },
-
-  {
-    title: 'Players Voted/Total',
-    key: 'totalPlayersVoted',
-    dataIndex: 'totalPlayersVoted'
-  },
-  
+  }
 ];
 
+const HistoryTable: React.FC= () => {
+ const [history, setHistory] = useState<Game[]>() 
+ useEffect (()=>{
+  async function fetchData () {
+    let historyGameList = await getHistory();
+    setHistory(historyGameList);
+  } 
+   fetchData();
+ }, [])
+ 
+ const dataSource: Game[] = []
+ history?.forEach(function (value) {
+  dataSource.push(value);
+ })
+ 
+ console.log(history);
+ return <Table columns={columns} dataSource={dataSource}/>;
+}
 
-
-
-/*function HistoryTable() {
-  const votingHistory = gamesService.getVotingHistory();
-  return <Table columns={columns} dataSource={votingHistory} />;
-}*/
-
-//export default HistoryTable;
+export default HistoryTable;

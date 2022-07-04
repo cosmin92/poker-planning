@@ -1,8 +1,13 @@
 import { Button, Modal } from 'antd';
 import React, { useState } from 'react';
-//import HistoryTable from './HistoryTable';
+import { Game } from '../types/Game';
+import HistoryTable from './HistoryTable';
 
-const ModalSettings: React.FC = () => {
+interface ModalHistoryProps {
+  game: Game;
+}
+
+const ModalHistory: React.FC<ModalHistoryProps> = ({game}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -17,16 +22,20 @@ const ModalSettings: React.FC = () => {
     setIsModalVisible(false);
   };
 
+  const handleUpdate = () =>{
+
+  }
+
   return (
     <>
       <Button type="primary" onClick={showModal}>
         Voting History
       </Button>
       <Modal title="Voting History" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        {/* <HistoryTable/> */}
+        {<HistoryTable/>}
       </Modal>
     </>
   );
 };
 
-export default ModalSettings;
+export default ModalHistory;
