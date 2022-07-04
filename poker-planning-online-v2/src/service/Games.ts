@@ -99,7 +99,3 @@ export const updateGameStatus = async (gameId: string): Promise<boolean> => {
     }
     return false;
 };
-
-export const setGameName = async(gameId: string, gameName: string) =>{
-    alert("TO DO")
-}
