@@ -64,7 +64,7 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
           </button>
         </div>
       </div>
-      <button onClick={() => resetGame(game.id)}>New Game</button>
+      <button onClick={() => resetGame(game.id, "😴")}>New Game</button>
       <Snackbar
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
         open={showCopiedMessage}

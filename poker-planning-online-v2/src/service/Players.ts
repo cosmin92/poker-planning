@@ -64,8 +64,21 @@ export const addPlayerToGame = async (gameId: string, playerName: string): Promi
     return true;
 };
 
-export const resetGame = async (gameId: string) => {
+export const resetGame = async (gameId: string, randomEmoji: string) => {
     const players = await getPlayersFromStore(gameId);
 
-    // updatePlayerInStore();
+    if (gameId) {
+        const updatedPlayers = {
+            ...players,
+            value: 0,
+            status: Status.NotStarted,
+            randomEmoji: "😴",
+        };
+
+        updatePlayerInStore(gameId, );
+        await updateGameStatus(gameId);
+        return true;
+    }
+    return false;
+
 };
