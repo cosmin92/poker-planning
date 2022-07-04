@@ -76,18 +76,4 @@ export const resetGame = async (gameId: string) => {
         await updatePlayerInStore(gameId, updatedPlayer);
         await updateGameStatus(gameId);
     })
-
-    // if (gameId) {
-    //     const updatedPlayers = {
-    //         ...players,
-    //         value: 0,
-    //         status: Status.NotStarted,
-    //     };
-
-    //     updatePlayerInStore(gameId,  );
-    //     await updateGameStatus(gameId);
-    //     return true;
-    // }
-    // return false;
-
 };
