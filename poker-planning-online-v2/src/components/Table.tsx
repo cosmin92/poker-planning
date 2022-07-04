@@ -61,7 +61,7 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
           </button>
           <button className="buttonExitStyle">
             <FontAwesomeIcon
-              icon={faLink}
+              icon={faCircleXmark}
               className="exitStyle"
               onClick={() => exit()}
             />
@@ -77,7 +77,9 @@ export const Table: React.FC<TableProps> = ({ game, currentPlayerId }) => {
           </button>
         </div>
       </div>
+      {isModerator(game.createdBy, currentPlayerId) &&(
       <Button className="text-nearFooter" onClick={() => resetGame(game.id)}>New Game</Button>
+      )}
       <Snackbar
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
         open={showCopiedMessage}
