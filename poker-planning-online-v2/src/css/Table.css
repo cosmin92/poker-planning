@@ -39,7 +39,7 @@
     width: 75px;
     height: 75px;
     margin-top: 25px;
-    margin-left: 40px;
+    margin-left: 20px;
     cursor: pointer;
     background-color: white;
 }
@@ -49,9 +49,26 @@
     border-radius: 50px;
     width: 75px;
     height: 75px;
-    margin-left: 100px;
+    margin-left: 40px;
     cursor: pointer;
     background-color: white;
+}
+
+.buttonExitStyle{
+    border: 1px solid #3993ff;
+    border-radius: 50px;
+    width: 75px;
+    height: 75px;
+    margin-left: 40px;
+    cursor: pointer;
+    background-color: white;
+}
+
+
+.exitStyle{
+    color: #3993ff;
+    font-size: 50px;
+    margin-top: 10px;
 }
 
 .eyeStyle{

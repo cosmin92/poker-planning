@@ -20,14 +20,13 @@ export const addPlayer = async (gameId: string, player: Player) => {
     }
 };
 
-export const updatePlayerValue = async (gameId: string, playerId: string, value: number, randomEmoji: string) => {
+export const updatePlayerValue = async (gameId: string, playerId: string, value: number) => {
     const player = await getPlayerFromStore(gameId, playerId);
 
     if (player) {
         const updatedPlayer = {
             ...player,
             value: value,
-            emoji: randomEmoji,
             status: Status.Finished,
         };
         await updatePlayerInStore(gameId, updatedPlayer);
@@ -64,21 +63,30 @@ export const addPlayerToGame = async (gameId: string, playerName: string): Promi
     return true;
 };
 
-export const resetGame = async (gameId: string, randomEmoji: string) => {
+export const resetGame = async (gameId: string) => {
     const players = await getPlayersFromStore(gameId);
 
-    if (gameId) {
-        const updatedPlayers = {
-            ...players,
-            value: 0,
+    players.forEach(async (player) => {
+        const updatedPlayer: Player = {
+            ...player,
             status: Status.NotStarted,
-            randomEmoji: "😴",
+            value: 0,
         };
 
-        updatePlayerInStore(gameId, );
-        await updateGameStatus(gameId);
-        return true;
-    }
-    return false;
+        await updatePlayerInStore(gameId, updatedPlayer);
+    })
+
+    // if (gameId) {
+    //     const updatedPlayers = {
+    //         ...players,
+    //         value: 0,
+    //         status: Status.NotStarted,
+    //     };
+
+    //     updatePlayerInStore(gameId,  );
+    //     await updateGameStatus(gameId);
+    //     return true;
+    // }
+    // return false;
 
 };
