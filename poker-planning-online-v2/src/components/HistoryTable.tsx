@@ -1,9 +1,13 @@
-import {Table} from 'antd';
+import { Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getHistory } from '../service/Games';
 import { Game } from '../types/Game';
 
-const columns =  [
+interface HistoryTableProps{
+  history: Game[],
+}
+
+const columns = [
   {
     title: 'Game name',
     dataIndex: 'name',
@@ -16,23 +20,15 @@ const columns =  [
   }
 ];
 
-const HistoryTable: React.FC= () => {
- const [history, setHistory] = useState<Game[]>() 
- useEffect (()=>{
-  async function fetchData () {
-    let historyGameList = await getHistory();
-    setHistory(historyGameList);
-  } 
-   fetchData();
- }, [])
- 
- const dataSource: Game[] = []
- history?.forEach(function (value) {
-  dataSource.push(value);
- })
- 
- console.log(history);
- return <Table columns={columns} dataSource={dataSource}/>;
+const HistoryTable: React.FC<HistoryTableProps> = ({history}) => {
+  
+
+  const dataSource: Game[] = []
+  history?.forEach(function (value) {
+    dataSource.push(value);
+  })
+
+  return <Table columns={columns} dataSource={dataSource} />;
 }
 
 export default HistoryTable;
