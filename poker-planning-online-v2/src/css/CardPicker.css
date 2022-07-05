@@ -19,10 +19,13 @@
     background-color: hsl(200, 100%, 95%);
 }
 
-.btn-footer-primary:focus{
+.btn-footer-primary-active{
     background-color: hsl(201, 100%, 72%);
 }
 
+.btn-footer-primary:focus{
+    background-color: hsl(201, 100%, 72%);
+}
 
 .mr-5px{
     margin-right: 15px;

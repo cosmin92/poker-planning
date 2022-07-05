@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/CardPicker.css';
 import { updatePlayerValue } from '../service/Players';
 import { Game } from '../types/Game';
@@ -14,19 +14,27 @@ interface CardPickerProps {
 
 export const CardPicker: React.FC<CardPickerProps>=({game, players, currentPlayerId}) => {
 
-    const playPlayer = (gameId: string, playerId: string, card: number) => {
-        if (game.gameStatus !== Status.Finished) {
-          updatePlayerValue(gameId, playerId, card);
-        }
-      };
+  const [active, setActive] = useState(false);
 
-      const cards = getCards(game.gameType);
+  const playPlayer = (gameId: string, playerId: string, card: number) => {
+
+      document.querySelector('button.btn-footer-primary-active')?.classList.remove('btn-footer-primary-active');
+      document.getElementById(card.toString())?.classList.add('btn-footer-primary-active');
+
+    if (game.gameStatus !== Status.Finished) {
+      updatePlayerValue(gameId, playerId, card);
+    }
+  };
+
+  const cards = getCards(game.gameType);
 
   return (
 
     <div className='cards'>
       {cards.map((card: CardConfig) =>(
-         <button key={card.value} className='btn-footer btn-footer-primary mr-5px' onClick={() =>playPlayer(game.id, currentPlayerId, card.value)}>{card.displayValue}</button>
+         <button id={card.value.toString()} key={card.value} className='btn-footer btn-footer-primary mr-5px' onClick={() =>playPlayer(game.id, currentPlayerId, card.value)}>
+            <div>{card.displayValue}</div>
+        </button>
       ))}
     </div>
 
