@@ -23,7 +23,7 @@
     background-color: hsl(201, 100%, 72%);
 }
 
-.btn-footer-primary:focus{
+.btn-footer-primary-active:hover{
     background-color: hsl(201, 100%, 72%);
 }
 

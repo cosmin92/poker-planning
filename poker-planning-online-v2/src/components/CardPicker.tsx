@@ -23,7 +23,6 @@ export const CardPicker: React.FC<CardPickerProps>=({game, players, currentPlaye
 
     if (game.gameStatus !== Status.Finished) {
       updatePlayerValue(gameId, playerId, card);
-      document.querySelector('button.btn-footer-primary-active')?.classList.remove('btn-footer-primary-active');
     }
   };
 
