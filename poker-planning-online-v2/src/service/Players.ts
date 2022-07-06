@@ -65,7 +65,6 @@ export const addPlayerToGame = async (gameId: string, playerName: string): Promi
 
 export const resetGame = async (gameId: string) => {
     const players = await getPlayersFromStore(gameId);
-    document.querySelector('button.btn-footer-primary-active')?.classList.remove('btn-footer-primary-active');
 
     players.forEach(async (player) => {
         const updatedPlayer: Player = {
