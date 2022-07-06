@@ -24,7 +24,13 @@ export const CardPicker: React.FC<CardPickerProps>=({game, players, currentPlaye
     if (game.gameStatus !== Status.Finished) {
       updatePlayerValue(gameId, playerId, card);
     }
+
+    if (game.gameStatus === Status.InProgress) { //other clicks
+      console.log('in progress');
+      updatePlayerValue(gameId, playerId, card);
+    }
   };
+
 
   const cards = getCards(game.gameType);
 
